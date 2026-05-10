@@ -1,7 +1,4 @@
-/* ═══════════════════════════════════════════════════════════
-   THE LAST MILE — main.js
-   All chart rendering, scroll effects, and interactivity
-   ═══════════════════════════════════════════════════════════ */
+
 
 'use strict';
 
