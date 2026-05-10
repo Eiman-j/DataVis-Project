@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Can't Pakistan's Last Child Be Saved?</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+
+<div id="progress-bar"></div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<!-- ─────────────────── NAV ─────────────────── -->
+<nav>
+  <span class="nav-logo">The Last Mile &nbsp;·&nbsp; Polio in Pakistan</span>
+  <ul class="nav-links">
+    <li><a href="#intro">The Problem</a></li>
+    <li><a href="#global">Global Context</a></li>
+    <li><a href="#border">Border Effect</a></li>
+    <li><a href="#coverage">Coverage Gap</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+
+<!-- ─────────────────── HERO ─────────────────── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+
+  <canvas id="particle-canvas" style="position:absolute;inset:0;pointer-events:none;width:100%;height:100%;"></canvas>
+
+  <p class="hero-eyebrow">Narrative Data Visualization · Polio · Pakistan 1980–2024</p>
+  <h1 class="hero-title">
+    Why Can't Pakistan's<br/><em>Last Child</em> Be Saved?
+  </h1>
+  <p class="hero-subtitle">
+    The world has nearly eradicated polio. One country — two countries, really — stand between us and zero. This is the data behind that failure.
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num" data-count="99.9">0</span>
+      <span class="hero-stat-label">% Global decline since 1988</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num" data-count="2">0</span>
+      <span class="hero-stat-label">Countries still endemic</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num" data-count="328">0</span>
+      <span class="hero-stat-label">Peak cases in Pakistan (2014)</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num" data-count="48">0</span>
+      <span class="hero-stat-label">% Max coverage data gap (2010)</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll to explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ─────────────────── INTRO ─────────────────── -->
+<section class="section" id="intro">
+  <div class="reveal">
+    <p class="section-label">Research Question</p>
+    <h2 class="section-title">Pakistan has hit "record lows"<br/>— and always bounced back.</h2>
+    <p class="section-intro">
+      The Global Polio Eradication Initiative has eliminated wild poliovirus in 123 countries since 1988.
+      Yet Pakistan cycles through near-success and relapse — not randomly, but driven by three structural forces: cross-border viral corridors, unreachable geographic pockets, and dangerously misleading official data.
+    </p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="stat-grid reveal">
+    <div class="stat-card">
+      <span class="num" style="color:var(--pastel-rose)">328</span>
+      <span class="label">Cases in 2014<br/>(Post-FATA ban)</span>
+    </div>
+    <div class="stat-card">
+      <span class="num" style="color:var(--pastel-mint)">1</span>
+      <span class="label">Historic low<br/>2021</span>
+    </div>
+    <div class="stat-card">
+      <span class="num" style="color:var(--pastel-amber)">+1,733%</span>
+      <span class="label">Largest single-year<br/>spike ever</span>
+    </div>
+    <div class="stat-card">
+      <span class="num" style="color:var(--pastel-violet)">−99%</span>
+      <span class="label">Drop in one year<br/>2020→2021</span>
+    </div>
+  </div>
+
+  <div class="chart-wrap reveal" style="margin-top:2rem;">
+    <p class="chart-title">Pakistan Wild Poliovirus Cases — Annual Count (2000–2024)</p>
+    <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:1rem;">Hover bars for year details. Click a bar to highlight.</p>
+    <canvas id="chart-pak-cases" height="280"></canvas>
+    <div id="cases-annotation" style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);min-height:1.2em;"></div>
+  </div>
+</section>
+
+<!-- ─────────────────── GLOBAL ─────────────────── -->
+<div class="section-full" id="global">
+  <div class="glow-line" style="top:0;"></div>
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">Q1 — Global Trajectory</p>
+      <h2 class="section-title">Pakistan vs. the world:<br/>A race that hasn't ended.</h2>
+      <p class="section-intro">
+        The world reduced polio cases per million by over 99.9% since 1988. Pakistan broadly follows — but exhibits repeated surges that keep it among the last two endemic countries on Earth.
+      </p>
+    </div>
+
+    <div class="reveal chart-wrap">
+      <p class="chart-title">Paralytic Polio Cases per Million — Regional Comparison (1980–2023)</p>
+      <div class="btn-group" id="region-btns">
+        <button class="btn active" data-region="Pakistan">Pakistan</button>
+        <button class="btn active" data-region="Afghanistan">Afghanistan</button>
+        <button class="btn" data-region="India">India</button>
+        <button class="btn" data-region="Nigeria">Nigeria</button>
+        <button class="btn" data-region="World">World Avg</button>
+      </div>
+      <canvas id="chart-global" height="300"></canvas>
+    </div>
+
+    <div class="insight reveal">
+      Pakistan's per-capita burden now <strong>exceeds Afghanistan's</strong> in recent years — a structural failure, not just a security one. India eliminated polio in 2014; Nigeria in 2020. Both had comparable or lower coverage at the time.
+    </div>
+  </div>
+  <div class="glow-line" style="bottom:0;"></div>
+</div>
+
+<!-- ─────────────────── BORDER EFFECT ─────────────────── -->
+<section class="section" id="border">
+  <div class="reveal">
+    <p class="section-label">Q2 — The Border Effect</p>
+    <h2 class="section-title">The border isn't a barrier.<br/>It's a highway.</h2>
+    <p class="section-intro">
+      WHO and Nature Communications (2025) confirmed genetically identical WPV1 strains on both sides of the Pakistan–Afghanistan border — proving active cross-border viral flow. Where do Afghan refugees concentrate in Pakistan? Exactly where polio cases cluster.
+    </p>
+  </div>
+
+  <div class="two-col reveal">
+    <div>
+      <div class="chart-wrap" style="height:100%;">
+        <p class="chart-title">Afghan Refugees by Province (UNHCR Feb 2026)</p>
+        <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem;">Animate on scroll. Hover for case data.</p>
+        <div class="province-bars" id="province-bars">
+          <div class="province-row">
+            <span class="province-name">Khyber Pakhtunkhwa</span>
+            <div class="pbar-track">
+              <div class="pbar-fill" style="--target-w:100%;background:var(--c-kpk);" data-cases="108" data-pct="59%"></div>
+            </div>
+            <span class="province-val" style="color:var(--c-kpk)">553,245</span>
+          </div>
+          <div class="province-row">
+            <span class="province-name">Balochistan</span>
+            <div class="pbar-track">
+              <div class="pbar-fill" style="--target-w:38.5%;background:var(--c-balo);" data-cases="41" data-pct="23%"></div>
+            </div>
+            <span class="province-val" style="color:var(--c-balo)">212,922</span>
+          </div>
+          <div class="province-row">
+            <span class="province-name">Punjab</span>
+            <div class="pbar-track">
+              <div class="pbar-fill" style="--target-w:18.9%;background:var(--c-pun);" data-cases="5" data-pct="11%"></div>
+            </div>
+            <span class="province-val" style="color:var(--c-pun)">104,510</span>
+          </div>
+          <div class="province-row">
+            <span class="province-name">Sindh</span>
+            <div class="pbar-track">
+              <div class="pbar-fill" style="--target-w:7.1%;background:var(--c-sind);" data-cases="3" data-pct="4%"></div>
+            </div>
+            <span class="province-val" style="color:var(--c-sind)">39,110</span>
+          </div>
+          <div class="province-row">
+            <span class="province-name">Islamabad</span>
+            <div class="pbar-track">
+              <div class="pbar-fill" style="--target-w:4.1%;background:var(--c-isla);" data-cases="1" data-pct="1%"></div>
+            </div>
+            <span class="province-val" style="color:var(--c-isla)">22,866</span>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem;font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">
+          Hover a bar → see WPV1 case count (2019–23)
+        </div>
+
+        <div class="insight" style="margin-top:1.5rem;">
+          Pearson r ≈ <strong style="color:var(--pastel-violet)">0.97</strong> between refugee population and provincial case count.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="chart-wrap" id="pakistan-map">
+        <p class="chart-title">Pakistan Province Map — Refugee & Case Burden</p>
+        <svg viewBox="0 0 420 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:380px;">
+          <!-- KPK -->
+          <path class="province-path" d="M 130 80 L 200 60 L 240 90 L 230 140 L 210 160 L 180 155 L 160 170 L 135 155 L 120 130 Z"
+            fill="rgba(255,140,127,0.55)" id="kpk-path"
+            data-name="Khyber Pakhtunkhwa" data-refugees="553,245" data-cases="108" data-pct="59%"/>
+          <!-- FATA/tribal belt -->
+          <path class="province-path" d="M 200 60 L 240 45 L 260 70 L 250 100 L 240 90 Z"
+            fill="rgba(255,140,127,0.35)" data-name="Tribal Districts" data-refugees="Incl. in KPK" data-cases="—" data-pct="—"/>
+          <!-- Balochistan -->
+          <path class="province-path" d="M 120 130 L 135 155 L 160 170 L 170 250 L 140 310 L 100 340 L 60 300 L 50 230 L 70 160 Z"
+            fill="rgba(255,170,180,0.45)" id="balo-path"
+            data-name="Balochistan" data-refugees="212,922" data-cases="41" data-pct="23%"/>
+          <!-- Punjab -->
+          <path class="province-path" d="M 210 160 L 230 140 L 270 150 L 300 200 L 280 260 L 240 270 L 210 250 L 200 210 Z"
+            fill="rgba(125,211,252,0.45)" id="pun-path"
+            data-name="Punjab" data-refugees="104,510" data-cases="5" data-pct="11%"/>
+          <!-- Sindh -->
+          <path class="province-path" d="M 200 210 L 210 250 L 240 270 L 235 320 L 200 360 L 165 340 L 150 300 L 155 260 L 170 250 Z"
+            fill="rgba(126,255,196,0.45)" id="sind-path"
+            data-name="Sindh" data-refugees="39,110" data-cases="3" data-pct="4%"/>
+          <!-- Gilgit-Baltistan -->
+          <path class="province-path" d="M 200 60 L 250 40 L 290 50 L 310 80 L 280 100 L 260 70 Z"
+            fill="rgba(212,184,240,0.3)" data-name="Gilgit-Baltistan" data-refugees="Minor" data-cases="0" data-pct="<1%"/>
+          <!-- Islamabad -->
+          <circle class="province-path" cx="245" cy="152" r="10"
+            fill="rgba(255,213,128,0.8)" stroke="var(--bg-card)" stroke-width="1.5" id="isla-path"
+            data-name="Islamabad" data-refugees="22,866" data-cases="1" data-pct="1%"/>
+
+          <!-- Labels -->
+          <text x="165" y="130" fill="rgba(255,255,255,0.7)" font-size="9" font-family="IBM Plex Mono, monospace" text-anchor="middle">KPK</text>
+          <text x="105" y="240" fill="rgba(255,255,255,0.6)" font-size="9" font-family="IBM Plex Mono, monospace" text-anchor="middle">Balochistan</text>
+          <text x="255" y="215" fill="rgba(255,255,255,0.7)" font-size="9" font-family="IBM Plex Mono, monospace" text-anchor="middle">Punjab</text>
+          <text x="198" y="295" fill="rgba(255,255,255,0.7)" font-size="9" font-family="IBM Plex Mono, monospace" text-anchor="middle">Sindh</text>
+          <text x="260" y="170" fill="rgba(255,213,128,0.9)" font-size="7" font-family="IBM Plex Mono, monospace" text-anchor="middle">ISB</text>
+
+          <!-- Legend -->
+          <rect x="10" y="380" width="12" height="12" fill="rgba(255,140,127,0.6)" rx="2"/>
+          <text x="26" y="391" fill="rgba(255,255,255,0.5)" font-size="8" font-family="IBM Plex Mono">High burden</text>
+          <rect x="10" y="397" width="12" height="12" fill="rgba(126,255,196,0.5)" rx="2"/>
+          <text x="26" y="408" fill="rgba(255,255,255,0.5)" font-size="8" font-family="IBM Plex Mono">Low burden</text>
+
+          <!-- Correlation label -->
+          <text x="210" y="430" fill="rgba(180,160,255,0.8)" font-size="8.5" font-family="IBM Plex Mono" text-anchor="middle">Pearson r ≈ 0.97  (refugees ↔ cases)</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-wrap reveal" style="margin-top:2rem;">
+    <p class="chart-title">Correlation: Refugee Population vs. WPV1 Case Count (2019–2023, by Province)</p>
+    <canvas id="chart-scatter" height="260"></canvas>
+  </div>
+</section>
+
+<!-- ─────────────────── COVERAGE GAP ─────────────────── -->
+<div class="section-full" id="coverage">
+  <div class="glow-line" style="top:0;"></div>
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">Q3 — The Coverage Gap</p>
+      <h2 class="section-title">The government said 99%.<br/>Reality said 52%.</h2>
+      <p class="section-intro">
+        Three sources measure Pakistan's polio vaccination coverage — and they tell radically different stories. ADMIN (facility-reported) data consistently overstates the WHO/UNICEF independent estimate (WUENIC) by up to 48 percentage points.
+      </p>
+    </div>
+
+    <div class="scrolly">
+      <div class="scrolly-steps">
+        <div class="scrolly-step active" data-step="0">
+          <div class="step-num">01</div>
+          <h3 class="step-title">Three measures, three stories</h3>
+          <p class="step-body">Every year, three numbers are recorded for Pakistan's OPV3 coverage: ADMIN (what facilities report), OFFICIAL (government's own estimate), and WUENIC (WHO/UNICEF independent audit). They should agree. They don't.</p>
+        </div>
+        <div class="scrolly-step" data-step="1">
+          <div class="step-num">02</div>
+          <h3 class="step-title">The dangerous peak (2010)</h3>
+          <p class="step-body">In 2010, ADMIN reported 99.56% coverage — near-perfect. WUENIC estimated just 52%. A 48-percentage-point gap. During this very window of false confidence, cases were climbing toward the catastrophic 2014 peak of 328.</p>
+        </div>
+        <div class="scrolly-step" data-step="2">
+          <div class="step-num">03</div>
+          <h3 class="step-title">Coverage vs. cases (the correlation)</h3>
+          <p class="step-body">Case spikes consistently follow periods of low WUENIC coverage (r = −0.30). When WUENIC dropped to 52% (2009–10), cases climbed. Recovery to 75%+ by 2017 → historic low of 8 cases the same year.</p>
+        </div>
+        <div class="scrolly-step" data-step="3">
+          <div class="step-num">04</div>
+          <h3 class="step-title">The 2019 paradox</h3>
+          <p class="step-body">But the 2019 surge happened at 84% WUENIC coverage — well above threshold. This signals a fundamental shift: the problem is no longer system-wide coverage collapse, but <em>localised, geographically concentrated unreachable pockets</em> in border districts.</p>
+        </div>
+      </div>
+
+      <div class="scrolly-text">
+        <div class="chart-wrap" style="min-height:340px;position:relative;">
+          <p class="chart-title">Coverage by Type vs. Annual Cases</p>
+          <div class="coverage-legend">
+            <span class="leg-item"><span class="leg-dot" style="background:var(--pastel-rose)"></span>ADMIN (reported)</span>
+            <span class="leg-item"><span class="leg-dot" style="background:var(--pastel-sky)"></span>OFFICIAL</span>
+            <span class="leg-item"><span class="leg-dot" style="background:var(--pastel-mint)"></span>WUENIC (independent)</span>
+            <span class="leg-item"><span class="leg-dot" style="background:var(--pastel-amber);border-radius:2px;"></span>WPV1 Cases</span>
+          </div>
+          <canvas id="chart-coverage" height="280"></canvas>
+        </div>
+
+        <div class="chart-wrap" style="margin-top:1rem;">
+          <p class="chart-title">Year Explorer — <span id="slider-year">2010</span></p>
+          <input type="range" id="year-slider" min="2000" max="2024" value="2010" step="1"/>
+          <div id="year-detail" style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.72rem;line-height:1.8;color:var(--text-secondary);"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight reveal" style="margin-top:3rem;">
+      WUENIC (independent) <strong>never reached 90%</strong> in the 2000–2024 period. ADMIN claimed 99%+ multiple times. The gap isn't measurement noise — it's a systemic reporting failure that delayed corrective action.
+    </div>
+  </div>
+  <div class="glow-line" style="bottom:0;"></div>
+</div>
+
+<!-- ─────────────────── GLOBAL RANK ─────────────────── -->
+<section class="section">
+  <div class="reveal">
+    <p class="section-label">Global Ranking</p>
+    <h2 class="section-title">86% coverage. Rank 87th.<br/>Still not enough.</h2>
+    <p class="section-intro">
+      Pakistan ranked 87th out of 218 countries in 2023 OPV3 coverage at 86% — above the 80% WHO target. India and Nigeria eliminated polio with comparable or lower coverage. The difference: they closed the geographic gaps.
+    </p>
+  </div>
+
+  <div class="chart-wrap reveal">
+    <p class="chart-title">Pakistan vs. Other Countries — OPV3 Coverage (2023) — Interactive Dot Plot</p>
+    <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem;">Hover dots for details. Pakistan, India, Nigeria highlighted.</p>
+    <canvas id="chart-dotplot" height="240"></canvas>
+  </div>
+
+  <div class="three-col reveal" style="margin-top:2rem;">
+    <div class="card">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--pastel-violet);letter-spacing:0.15em;margin-bottom:0.5rem;">INDIA</div>
+      <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--pastel-mint);">Eliminated 2014</div>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.4rem;">Aggressive geospatial targeting of unreached pockets. ~72% coverage at the time.</p>
+    </div>
+    <div class="card">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--pastel-violet);letter-spacing:0.15em;margin-bottom:0.5rem;">NIGERIA</div>
+      <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--pastel-sky);">Eliminated 2020</div>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.4rem;">Door-to-door campaigns in conflict zones. Coverage below Pakistan's when certified.</p>
+    </div>
+    <div class="card">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--pastel-violet);letter-spacing:0.15em;margin-bottom:0.5rem;">PAKISTAN</div>
+      <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--pastel-rose);">Still endemic</div>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.4rem;">86% aggregate coverage masks border pockets that are permanently unreachable by standard campaigns.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────── CONCLUSION ─────────────────── -->
+<section id="conclusion">
+  <div class="reveal">
+    <p class="section-label" style="justify-content:center;">Conclusion</p>
+    <h2 class="section-title" style="font-size:clamp(2rem,4vw,3.5rem);">Pakistan's polio persistence<br/>is not a single-cause problem.</h2>
+
+    <blockquote class="conclusion-quote">
+      "As long as even one child remains infected with poliovirus, children in all countries are at risk."
+      <cite style="display:block;font-size:0.8rem;margin-top:0.75rem;font-style:normal;color:var(--text-muted);">— UNICEF Pakistan</cite>
+    </blockquote>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <p class="pillar-text"><strong style="color:var(--pastel-rose)">Cross-border viral flow</strong> via Afghan refugee corridors in KPK and Balochistan. Genetically identical strains confirmed on both sides.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <p class="pillar-text"><strong style="color:var(--pastel-amber)">A 10–48 percentage-point gap</strong> between reported and independently-estimated vaccination coverage — masking where children are truly unreached.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <p class="pillar-text"><strong style="color:var(--pastel-violet)">Persistent security barriers</strong> that make certain border districts structurally unreachable during standard vaccination campaigns.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────── FOOTER ─────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-credits">
+      <h4>Team</h4>
+      <p>Project Final · Eiman (2023180) &amp; Aqsa Zeeshan (2023123)</p>
+      <p style="margin-top:0.75rem;color:var(--text-secondary);">Submitted: 11 May 2026 · Narrative Visualization</p>
+    </div>
+    <div class="footer-credits">
+      <h4>Data Sources</h4>
+      <ul>
+        <li>WHO/UNICEF JRF — Pakistan OPV3 Coverage (DS1)</li>
+        <li>Our World in Data — Global Vaccine Coverage (DS2)</li>
+        <li>Our World in Data / WHO — Paralytic Cases per Million (DS3)</li>
+        <li>UNHCR — Afghan Refugees in Pakistan by Province (DS4)</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
